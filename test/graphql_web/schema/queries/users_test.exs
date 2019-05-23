@@ -6,29 +6,48 @@ defmodule GraphqlWeb.Schema.Queries.UsersTest do
     :ok
   end
 
-  @users_query """
+  @query """
   {
     users {
       name
+      posts {
+        title
+      }
     }
   }
   """
-  test "return user's names", %{conn: conn} do
-    conn = get conn, "/api", query: @users_query
+  test "return user's names and posts", %{conn: conn} do
+    conn = get conn, "/api", query: @query
 
     assert json_response(conn, 200) == %{
              "data" => %{
                "users" => [
-                 %{"name" => "tung"},
-                 %{"name" => "ngan"},
-                 %{"name" => "huyen"},
-                 %{"name" => "dung"}
+                 %{
+                   "name" => "dung",
+                   "posts" => []
+                 },
+                 %{
+                   "name" => "huyen",
+                   "posts" => []
+                 },
+                 %{
+                   "name" => "ngan",
+                   "posts" => [
+                     %{"title" => "TUNG"}
+                   ]
+                 },
+                 %{
+                   "name" => "tung",
+                   "posts" => [
+                     %{"title" => "ABCD"}
+                   ]
+                 }
                ]
              }
            }
   end
 
-  @posts_query """
+  @query """
   {
     posts {
       author {
@@ -40,7 +59,7 @@ defmodule GraphqlWeb.Schema.Queries.UsersTest do
   }
   """
   test "return posts", %{conn: conn} do
-    conn = get conn, "/api", query: @posts_query
+    conn = get conn, "/api", query: @query
 
     assert json_response(conn, 200) == %{
              "data" => %{
@@ -59,6 +78,50 @@ defmodule GraphqlWeb.Schema.Queries.UsersTest do
                    "title" => "TUNG",
                    "body" => "tung"
                  }
+               ]
+             }
+           }
+  end
+
+  @query """
+  query ($term: String) {
+    users(matching: $term) {
+      name
+    }
+  }
+  """
+  @variables %{"term" => "ung"}
+  test "users and matching", %{conn: conn} do
+    conn = get conn, "/api", query: @query, variables: @variables
+
+    assert json_response(conn, 200) == %{
+             "data" => %{
+               "users" => [
+                 %{"name" => "dung"},
+                 %{"name" => "tung"}
+               ]
+             }
+           }
+  end
+
+  @query """
+  query ($order: SortOrder!) {
+    users(order: $order) {
+      name
+    }
+  }
+  """
+  @variables %{"order" => "DESC"}
+  test "users DESC order", %{conn: conn} do
+    conn = get conn, "/api", query: @query, variables: @variables
+
+    assert json_response(conn, 200) == %{
+             "data" => %{
+               "users" => [
+                 %{"name" => "tung"},
+                 %{"name" => "ngan"},
+                 %{"name" => "huyen"},
+                 %{"name" => "dung"}
                ]
              }
            }

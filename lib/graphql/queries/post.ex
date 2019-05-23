@@ -6,6 +6,14 @@ defmodule Graphql.Queries.Post do
     Repo.all(Post)
   end
 
+  def posts_of(author_id) do
+    query =
+      from p in Post,
+        where: p.author_id == ^author_id
+
+    Repo.all(query)
+  end
+
   def author(post_id) do
     query =
       from u in User,
