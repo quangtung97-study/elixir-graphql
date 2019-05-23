@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :graphql, Graphql.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "quangtung97",
   database: "graphql_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

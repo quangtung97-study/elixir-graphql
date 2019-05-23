@@ -13,9 +13,6 @@ defmodule GraphqlWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :graphql do
-  end
-
   scope "/", GraphqlWeb do
     pipe_through :browser
 
@@ -24,7 +21,6 @@ defmodule GraphqlWeb.Router do
 
   scope "/api" do
     pipe_through :api
-    pipe_through :graphql
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: GraphqlWeb.Schema,

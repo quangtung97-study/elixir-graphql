@@ -25,6 +25,11 @@ defmodule GraphqlWeb.Schema do
     field :title, :string
     field :body, :string
     field :author_id, :id
+
+    field :author, :user do
+      resolve(&Resolvers.Post.author/3)
+    end
+
     field :published_at, :date
     field :updated_at, :date
     field :inserted_at, :date
