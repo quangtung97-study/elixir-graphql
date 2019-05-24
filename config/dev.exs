@@ -73,3 +73,5 @@ config :graphql, Graphql.Repo,
   database: "graphql_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :gettext, :default_locale, "vi"

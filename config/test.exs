@@ -16,3 +16,5 @@ config :graphql, Graphql.Repo,
   database: "graphql_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :gettext, :default_locale, "vi"
