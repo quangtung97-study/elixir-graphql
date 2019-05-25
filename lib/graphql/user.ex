@@ -30,6 +30,7 @@ defmodule Graphql.User do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
     |> put_password_hash()
+    |> unique_constraint(:name)
   end
 
   def changeset(params) do

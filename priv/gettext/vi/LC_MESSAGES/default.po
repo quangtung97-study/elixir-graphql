@@ -15,3 +15,9 @@ msgstr ""
 #: lib/graphql_web/templates/page/index.html.eex:2
 msgid "Welcome to %{name}!"
 msgstr "Chào mừng đến %{name}!"
+
+msgid "password"
+msgstr "mật khẩu"
+
+msgid "name"
+msgstr "tên"

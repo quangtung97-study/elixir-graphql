@@ -19,4 +19,12 @@ defmodule GraphqlWeb.Schema.UserTypes do
       resolve(&Resolvers.User.users/3)
     end
   end
+
+  object :user_mutations do
+    field :create_user, :user do
+      arg(:name, :string)
+      arg(:password, :string)
+      resolve(&Resolvers.User.create/3)
+    end
+  end
 end

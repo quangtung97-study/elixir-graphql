@@ -26,4 +26,8 @@ defmodule GraphqlWeb.Schema do
     import_fields(:user_queries)
     import_fields(:post_queries)
   end
+
+  mutation do
+    import_fields(:user_mutations)
+  end
 end
