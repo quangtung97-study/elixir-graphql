@@ -44,7 +44,8 @@ defmodule Graphql.MixProject do
       {:absinthe_plug, "~> 1.4.0"},
       {:absinthe_ecto, "~> 0.1.3"},
       {:comeonin, "~> 5.1.0"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
