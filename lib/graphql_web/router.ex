@@ -24,8 +24,7 @@ defmodule GraphqlWeb.Router do
     pipe_through :api
 
     forward "/graphiql", Absinthe.Plug.GraphiQL,
-      schema: GraphqlWeb.Schema,
-      interface: :simple
+      schema: GraphqlWeb.Schema
 
     forward "/", Absinthe.Plug, schema: GraphqlWeb.Schema
   end
